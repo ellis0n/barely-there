@@ -1,0 +1,13 @@
+---
+import AlbumGallery from "@components/AlbumGallery.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const releases = await getCollection("releases");
+---
+
+<Layout title="releases" layout="content">
+	<div slot="content" >
+			<h1 class="text-6xl bg-black text-white">releases</h1>
+			<AlbumGallery />
+	</div>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@layouts/Layout.astro";
+
+interface Props {
+	post: any;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const posts = await Astro.glob("../../content/posts/**/*.md");
+
+	return (
+		posts
+			// .filter((post) => post.frontmatter.data.draft === false)
+			.map((post) => ({
+				params: { slug: post.frontmatter.slug },
+				props: { post },
+			}))
+	);
+};
+
+const { Content } = Astro.props.post;
+
+const frontmatter = Astro.props.post.frontmatter;
+---
+
+<Layout
+	title={frontmatter.title}
+	current="/blogs"
+	layout="content"
+	meta={frontmatter}
+>
+	<div slot="sidebar">
+		<h1>{frontmatter.title}</h1>
+		<p>{frontmatter.date}</p>
+	</div>
+	<div slot="content">
+		<Content />
+	</div>
+</Layout>
+
+ ```

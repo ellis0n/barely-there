@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContentLayout from "../layouts/ContentLayout.astro";
+
+import { Image } from "astro:assets";
+
+import { type CollectionEntry, getCollection } from "astro:content";
+
+const authors: CollectionEntry<"authors">[] = await getCollection("authors");
+---
+
+<Layout title="authors" layout="content">
+	<ContentLayout>
+		<h2 slot="sidebar">authors</h2>
+
+		<div slot="content">
+			{
+				authors.map((author) => (
+					<a href={`/authors/${author.data.username}`}>
+						<div class="ring-inset ring-2 grid grid-cols-2 grid-rows-2">
+							<h2 class="p-4 text-3xl pl-6">{author.data.username}</h2>
+							<div class="flex justify-end p-4">
+								<Image
+									src={author.data.avatar}
+									alt="Avatar"
+									width={120}
+									height={120}
+								/>
+							</div>
+							<div class="ml-2">
+								<p>
+									{author.data.firstname}&nbsp;{author.data.lastname}
+								</p>
+								<p>{author.data.instagram}</p>
+								<p>{author.data.github}</p>
+							</div>
+						</div>
+					</a>
+				))
+			}
+		</div>
+	</ContentLayout>
+</Layout>

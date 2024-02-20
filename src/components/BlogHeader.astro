@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+import { navigate } from "astro:transitions/client";
+
+interface Props {
+	post: {
+		title: string;
+		username: string;
+		description: string;
+		tag: string;
+		draft: boolean;
+		date: string;
+		slug: string;
+		relatedPosts: string[];
+		content: string;
+	};
+}
+
+const { title, username, date, relatedPosts, description } = Astro.props.post;
+
+const avatar = await getEntry("authors", username).then(
+	(data) => data?.data?.avatar
+);
+---
+
+<div class="bg-gray-100 drop-shadow-md grid sm:flex sm:justify-between px-2">
+	<div class="">
+		<h1 class="text-xl">
+			{title}
+		</h1>
+		<div class="flex flex-col mb-2">
+			<span>
+				<a href=`../authors/${username}`>
+					{username}
+				</a>
+			</span>
+			<Image src={avatar} alt="Avatar" width={120} height={120} />
+		</div>
+	</div>
+
+	<div class="flex flex-col justify-end ml-auto mb-2 text-xs">
+		<p>
+			{description}
+		</p>
+		<p>
+			{date.split("T")[0]}
+		</p>
+
+		{
+			relatedPosts.length > 0 ? (
+				<p>
+					{" "}
+					related:
+					{relatedPosts.map((post) => {
+						return (
+							<a href={`../blogs/${post}`}>
+								{title}
+								{post !== relatedPosts[relatedPosts.length - 1] ? (
+									<span>, </span>
+								) : (
+									<span>.</span>
+								)}
+							</a>
+						);
+					})}
+				</p>
+			) : null
+		}
+	</div>
+</div>

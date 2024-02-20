@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const posts = await getCollection("posts");
+
+const authorsGlob = await Astro.glob("../content/authors/*.json");
+const authors = authorsGlob.map((author) => ({
+	author: author.default,
+}));
+---
+
+<Layout title="blogs" current="/blogs" layout="content">
+	<!-- <h1 slot="sidebar"></h1> -->
+
+	<div class="mb-4" slot="content">
+		<h2 class="text-6xl bg-black text-white">blogs</h2>
+		<h2>by author:</h2>
+		{
+			authors.map((author) => (
+				<div class="mt-2 ml-6">
+					<h2>
+						<a href={`/authors/${author.author.username}`}>
+							{author.author.username}
+						</a>
+					</h2>
+				</div>
+			))
+		}
+
+		<!-- TODO: Temporary UI to access all posts -->
+		<div class="border-black border-2">
+			<h2>All Posts:</h2>
+
+			<ul class="mt-4">
+				{
+					posts.map((post) => (
+						<li>
+							<a href={`/blogs/${post.slug}`}>
+								{post.data.username.id} - {post.data.title}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</Layout>

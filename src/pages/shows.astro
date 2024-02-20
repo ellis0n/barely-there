@@ -1,0 +1,142 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+// Get all shows, sort by date and remove drafts
+const shows = await getCollection("shows").then((shows) =>
+	shows
+		.map(({ slug, data }) => ({ slug, ...data }))
+		.filter((show) => show.draft === false)
+);
+
+// Split shows into upcoming and past
+const upcomingShows = shows.filter((show) => new Date(show.date) > new Date());
+const pastShows = shows.filter((show) => !upcomingShows.includes(show));
+
+// function that returns date in format: "Month Day, Year"
+function formatDate(date: string | number | Date) {
+	return new Date(date).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+}
+
+//TODO:
+//
+// - add dynamic bg image to upcoming shows (or just create astro component for bg bar)
+//
+// - on hover of upcoming show, show poster in view
+//
+// - toggle past shows list on click for mobile view
+//
+// - view transition: use background image and header as the primary element for // [show] page, not the current poster
+//
+// - paginate past shows list once some content is added
+---
+
+<Layout title="shows" layout="content">
+
+	<div slot="content" class="w-content grid items-center sm:grid-cols-2 sm:gap-12">
+		<div class="text-2xl">
+			<h2 class="text-6xl bg-black text-white">shows</h2>
+			{
+				upcomingShows.length === 0 && (
+					<h2 class="text-black mt-2 px-pb underline">upcoming tba</h2>
+				)
+			}
+			{
+				upcomingShows.length > 0 && (
+					<h2 class="text-4xl text-black mt-2 px-pb underline">upcoming:</h2>
+				)
+			}
+			<div class="ml-2">
+				{
+					upcomingShows.map((show) => {
+						return (
+							<div class="bg-black mt-4 shadow-sm">
+								<div
+									style={{ "--image-url": `url(${show.poster.src})` }}
+									class="bg-[image:var(--image-url)] bg-center bg-cover bg-blend-screen bg-clip-border text-2xl sm:text-6xl"
+								>
+									<a href={`./shows/${show.slug.replace(/\//g, "-")}`}>
+										<h3 class="text-white bg-black bg-opacity-60 pl-2">
+											{show.title}
+										</h3>
+									</a>
+								</div>
+							</div>
+						);
+					})
+				}
+			</div>
+
+			<h2 class="text-2xl mt-4 underline">past:</h2>
+			<div class="ml-2 text-xl">
+				{
+					pastShows.map((show) => {
+						return (
+							<div class="underline">
+								<h3>{show.title}</h3>
+							</div>
+						);
+					})
+				}
+			</div>
+		</div>
+
+		<!-- Featured poster -->
+
+		<div class="align-center">
+			<div class="inset-0 text-white">
+				{
+					upcomingShows.map((show) => {
+						let first = upcomingShows[0];
+
+						if (show === first) {
+							return (
+								<>
+									<div class=" text-white flex justify-between">
+										<h3 class="bg-black text-white">{show.title}</h3>
+										<h4>{formatDate(show.date)}</h4>
+									</div>
+									<Image
+										src={show.poster}
+										alt={show.title}
+										class="shadow-md max-h-fit"
+										transition:name={show.slug}
+									/>
+								</>
+							);
+						} else {
+							return (
+								<div class="hidden">
+									<div class="z-50 text-black relative">
+										<h3>{show.title}</h3>
+									</div>
+									<Image
+										src={show.poster}
+										alt={show.title}
+										class=" shadow-md"
+									/>
+								</div>
+							);
+						}
+					})
+				}
+				{
+					upcomingShows.length === 0 && (
+						<Image
+							src={pastShows[0].poster}
+							alt={pastShows[0].title}
+							class="shadow-md"
+						/>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<script></script>

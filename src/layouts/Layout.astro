@@ -1,0 +1,61 @@
+---
+// Fonts
+import "@fontsource/geist-sans";
+// import "@fontsource/geist-mono";
+
+import ContentLayout from "./ContentLayout.astro";
+
+// Local imports
+import Head from "@components/Head.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+// Types
+interface Props {
+	title: string;
+	layout: string;
+	meta?: object; // Optional meta TODO: decide on this
+}
+
+const { title, layout, meta } = Astro.props;
+const layoutName =
+	layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
+const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
+---
+
+<!doctype html>
+<html lang="en">
+	<Head title={title} />
+	<body class="bg-gray-200 font-sans w-full">
+		<div data-scroll-watcher="header" />
+		<Header/>
+		<ContentLayout>
+			<slot name="content" />
+		</ContentLayout>
+		<Footer/>
+	</body>
+</html>
+
+<script>
+	const body = document.querySelector('body');
+	const observeHeader = document.querySelector(
+		'[data-scroll-watcher="header"]',
+	);
+    
+	const scrollObserver = new IntersectionObserver(
+		(positions) => {
+			positions.forEach((position) => {
+				if (position.target instanceof HTMLElement) {
+					switch (position.target.dataset.scrollWatcher) {
+						case 'header':
+							body?.classList.toggle('scroll', !position.isIntersecting);
+							break;
+					}
+				}
+			});
+		},
+		{ rootMargin: '150px 0px -45px 0px' },
+	);
+
+	if (observeHeader) scrollObserver.observe(observeHeader);
+</script>

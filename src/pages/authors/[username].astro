@@ -1,0 +1,90 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+
+
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const authorsGlob = await Astro.glob("../../content/authors/*.json");
+
+    const postsGlob = await Astro.glob("../../content/posts/**/*.md");
+
+    const posts = postsGlob.map((post) => post.frontmatter)
+
+    const authors = authorsGlob.map((author) => ({
+        author: author.default,
+        posts:[],
+    }))
+
+    const getPostsByAuthor = (author: { author: any; posts?: never[]; }, posts: any[]) => {
+        const authorPosts: any[] = []
+        posts.forEach((post: { username: any; }) => {
+            if (post.username === author.author.username) {
+                authorPosts.push(post)
+            }
+        })
+        return authorPosts;
+    }    
+
+    authors.forEach((author) => {
+        author.posts = getPostsByAuthor(author, posts)
+    })
+
+    return authors.
+    map((author) => ({
+        params: {username: author.author.username},
+        props: {author: author.author, posts: author.posts}
+    }))
+}
+
+
+const author = Astro.props.author;
+const posts = Astro.props.posts;
+
+interface Post {
+    title: string;
+    description: string;
+    date: string;
+    slug: string;
+    username: string;
+}
+
+---
+<Layout
+    title=`${author.default.username}`
+    current="/blogs" 
+    layout="content"
+>
+
+<div>
+
+    <h1>
+        {author.username}
+    </h1>
+    
+    <div class="mt-5">
+        <ul>
+            {posts.map((post: Post) => 
+                (
+                    <div class="w-full">
+                        <div class=" justify-between sm:flex bg-black text-white mb-2 w-100">
+                            <a href={`/blogs/${post.slug}`}>
+                                <li>
+                                    {post.title}
+                                </li>
+                            </a>
+                            <button
+                            class="bg-black text-white hover:bg-white hover:text-black border border-white hover:border-black"
+                            >✓</button>
+                        </div>
+                        <div class="hidden">
+                            {post.description}
+                            {post.date}
+                        </div>
+                    </div>
+                )
+            )}
+        </ul>
+    </div>
+</div>
+</Layout>

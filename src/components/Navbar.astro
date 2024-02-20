@@ -1,0 +1,62 @@
+---
+
+const links = [
+	{
+		text: "RELEASES",
+		href: "/releases",
+	},
+	{
+		text: "SHOWS",
+		href: "/shows",
+	},
+	{
+		text: "BLOGS",
+		href: "/blogs",
+	},
+	{
+		text: "TV",
+		href: "/tv",
+	},
+	// {
+	//     text: 'zines',
+	//     href: '/zines',
+	// },
+];
+
+
+
+const setActive = (href: string) => {
+    console.log(Astro.url.pathname);
+    if (Astro.url.pathname.startsWith(href)) {
+        return "active";
+    }
+};
+
+
+---
+<nav class=" flex justify-end scroll:hidden">
+	<ul>
+		{
+			links.map((link, index) => (
+				<a href={link.href} >
+					<li
+						class={
+								`nav-item text-600 font-black ${	index > 0 ? "" : " "}
+								${setActive(link.href)}
+							`}
+					>
+						{link.text}
+					</li>
+				</a>
+			))
+		}
+	</ul>
+</nav>
+
+<style>
+	.nav-item:hover,
+	.active {
+		background: black;
+		color: #fff;
+	}
+</style>
