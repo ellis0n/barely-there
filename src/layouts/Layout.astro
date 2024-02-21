@@ -27,8 +27,6 @@ const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
 <html lang="en">
 	<Head title={title} />
 	<body class="bg-gray-200 font-sans w-full">
-		<div data-scroll-watcher="header" />
-		<Header/>
 		<ContentLayout>
 			<slot name="content" />
 		</ContentLayout>
@@ -37,25 +35,39 @@ const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
 </html>
 
 <script>
+  // Function to initialize Intersection Observer
+  const initIntersectionObserver = () => {
 	const body = document.querySelector('body');
-	const observeHeader = document.querySelector(
-		'[data-scroll-watcher="header"]',
-	);
-    
-	const scrollObserver = new IntersectionObserver(
-		(positions) => {
-			positions.forEach((position) => {
-				if (position.target instanceof HTMLElement) {
-					switch (position.target.dataset.scrollWatcher) {
-						case 'header':
-							body?.classList.toggle('scroll', !position.isIntersecting);
-							break;
-					}
-				}
-			});
-		},
-		{ rootMargin: '150px 0px -45px 0px' },
-	);
+	const observeHeader = document.querySelector('[data-scroll-watcher="header"]');
+	let scrollObserver;
 
-	if (observeHeader) scrollObserver.observe(observeHeader);
+    scrollObserver = new IntersectionObserver(
+      (positions) => {
+        positions.forEach((position) => {
+          if (position.target instanceof HTMLElement) {
+            switch (position.target.dataset.scrollWatcher) {
+              case 'header':
+                body?.classList.toggle('scroll', !position.isIntersecting);
+                break;
+            }
+          }
+        });
+      },
+      { rootMargin: '150px 0px -45px 0px' },
+    );
+
+    if (observeHeader) {
+      scrollObserver.observe(observeHeader);
+    }
+  };
+
+
+  // Run Intersection Observer setup after page load
+  document.addEventListener('astro:page-load', () => {
+    initIntersectionObserver();
+  });
 </script>
+
+
+
+

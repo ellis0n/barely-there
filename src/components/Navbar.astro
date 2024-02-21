@@ -17,16 +17,15 @@ const links = [
 		text: "TV",
 		href: "/tv",
 	},
-	// {
-	//     text: 'zines',
-	//     href: '/zines',
-	// },
+	{
+	    text: 'ZINES',
+	    href: '/zines',
+	},
 ];
 
 
 
 const setActive = (href: string) => {
-    console.log(Astro.url.pathname);
     if (Astro.url.pathname.startsWith(href)) {
         return "active";
     }
@@ -34,14 +33,14 @@ const setActive = (href: string) => {
 
 
 ---
-<nav class=" flex justify-end scroll:hidden">
-	<ul>
+<nav class=" flex justify-center scroll:hidden ">
+	<ul class="space-y-1">
 		{
 			links.map((link, index) => (
 				<a href={link.href} >
 					<li
 						class={
-								`nav-item text-600 font-black ${	index > 0 ? "" : " "}
+								`nav-item text-300 font-black pr-6 sm:pr-12 pl-1 
 								${setActive(link.href)}
 							`}
 					>
@@ -59,4 +58,6 @@ const setActive = (href: string) => {
 		background: black;
 		color: #fff;
 	}
+
+	.nav-item:last-
 </style>

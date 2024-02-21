@@ -5,15 +5,14 @@ import Logo from "./Logo.astro";
 import Navbar from "./Navbar.astro";
 
 ---
-
+<div data-scroll-watcher="header"></div>
 <header
 	class=`fixed flex justify-center w-full z-20 bg-white backdrop-blur-[1px]  py-4 scroll:py-2
 	` 
-	transition:name="header"
->
+	transition:animate="none">
 	<div class="justify-center items-center grid grid-cols-header gap-2  sm:gap-4 scroll:grid-cols-3 transition-[font-size] text-1200 scroll:text-800 
-	">
-		<a href="/" class="py-2 col-start-2 w-[4em]
+	" >
+		<a href="/" class=" col-start-2 w-[4em]
 		 ">
 			<Logo
 				fill="#000"
@@ -22,6 +21,3 @@ import Navbar from "./Navbar.astro";
 	<Navbar />
 	</div>
 </header>
-
-
-
