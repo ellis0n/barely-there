@@ -1,10 +1,9 @@
 ---
-import { type GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
 	const shows = await getCollection("shows");
 	console.log(shows);
 
@@ -23,17 +22,16 @@ const show = Astro.props.show;
 const { Content } = await Astro.props.render;
 ---
 
-<Layout title=`${show.title} - ${show.date}` layout="content" current="/shows">
+<Layout title=`${show.title} - ${show.date}` layout="content">
 	<div slot="content">
 		<h1>{show.title}</h1>
-		<h2>{show.slug}</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div>
 				<Image
 					src={show.poster}
 					alt={show.title}
 					class="shadow-md mb-4"
-					transition:name={show.slug}
+					transition:name={Astro.params.id}
 				/>
 			</div>
 			<div class="prose">

@@ -1,25 +1,21 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { type GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
 	const releases = await getCollection("releases");
 	return releases.map((release) => ({
 		params: {
 			id: release.data.id,
 		},
-		props: {
-			release: release.data,
-			render: release.render(),
-		},
+		props: release
 	}));
 };
 
 
-const release = await Astro.props.release;
-const { Content } = await Astro.props.render;
+const release =  Astro.props.data;
+const { Content } = await Astro.props.render();
 ---
 
 <Layout

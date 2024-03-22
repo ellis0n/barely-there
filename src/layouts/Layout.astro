@@ -15,9 +15,12 @@ interface Props {
 	layout: string;
 }
 
-const { title, layout } = Astro.props;
-const layoutName =
-	layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
+const { 
+  title,
+  // layout
+   } = Astro.props;
+// const layoutName =
+	// layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
 
 // const Wrapper = await import(`../layouts/${layoutName}Layout.astro`); TODO: Dynamic import example if required
 ---

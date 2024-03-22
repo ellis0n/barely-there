@@ -2,7 +2,7 @@
 title: barely there
 slug: barely-there
 username: glenmay
-description: wow~
+description: wow
 relatedPosts: [the-first-post]
 draft: false
 date: 2023-09-17
