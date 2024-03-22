@@ -7,20 +7,19 @@ import ContentLayout from "./ContentLayout.astro";
 
 // Local imports
 import Head from "@components/Head.astro";
-import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
 // Types
 interface Props {
 	title: string;
 	layout: string;
-	meta?: object; // Optional meta TODO: decide on this
 }
 
-const { title, layout, meta } = Astro.props;
+const { title, layout } = Astro.props;
 const layoutName =
 	layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
-const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
+
+// const Wrapper = await import(`../layouts/${layoutName}Layout.astro`); TODO: Dynamic import example if required
 ---
 
 <!doctype html>

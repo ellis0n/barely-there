@@ -2,8 +2,6 @@
 import Layout from "@layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
 
-
-
 export const getStaticPaths: GetStaticPaths = async () => {
     const authorsGlob = await Astro.glob("../../content/authors/*.json");
 

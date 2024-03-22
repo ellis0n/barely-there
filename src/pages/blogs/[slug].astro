@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	return (
 		posts
-			// .filter((post) => post.frontmatter.data.draft === false)
+			.filter((post) => post.frontmatter.data.draft === false)
 			.map((post) => ({
 				params: { slug: post.frontmatter.slug },
 				props: { post },
@@ -26,9 +26,7 @@ const frontmatter = Astro.props.post.frontmatter;
 
 <Layout
 	title={frontmatter.title}
-	current="/blogs"
 	layout="content"
-	meta={frontmatter}
 >
 	<div slot="sidebar">
 		<h1>{frontmatter.title}</h1>

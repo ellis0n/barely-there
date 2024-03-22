@@ -1,4 +1,3 @@
-import type { ZodString } from "astro/zod";
 import { defineCollection, reference, z } from "astro:content";
 
 const posts = defineCollection({

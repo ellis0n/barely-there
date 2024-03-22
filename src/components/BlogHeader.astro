@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
-import { navigate } from "astro:transitions/client";
 
 interface Props {
 	post: {
@@ -20,7 +19,7 @@ interface Props {
 const { title, username, date, relatedPosts, description } = Astro.props.post;
 
 const avatar = await getEntry("authors", username).then(
-	(data) => data?.data?.avatar
+    (data) => data && data.data ? data.data.avatar : "" // TODO: sDefault avatar url 
 );
 ---
 

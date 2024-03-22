@@ -17,14 +17,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	}));
 };
 
-const release = Astro.props.release;
+
+const release = await Astro.props.release;
 const { Content } = await Astro.props.render;
 ---
 
 <Layout
 	title=`${release.albumTitle} by ${release.artist}`
 	layout="content"
-	current="/releases"
 >
 	<!-- <div slot="sidebar">releases</div> -->
 	<div slot="content">
