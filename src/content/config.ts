@@ -18,10 +18,10 @@ const authors = defineCollection({
 		firstname: z.string(),
 		lastname: z.string(),
 		email: z.string(),
-		github: z.string().url().optional(),
 		twitter: z.string().url(),
 		instagram: z.string().url(),
 		avatar: z.string(),
+		github: z.string().url().optional(),
 	}),
 });
 
@@ -50,11 +50,11 @@ const shows = defineCollection({
 	type: "content",
 	schema: ({ image }) =>
 		z.object({
-			featured: z.boolean().optional(),
 			title: z.string(),
-			venue: z.string().optional(),
 			date: z.date(),
 			poster: image(),
+			venue: z.string().optional(),
+			featured: z.boolean().optional(),
 			draft: z.boolean().optional(),
 			tickets: z.string().url().optional(),
 			tags: z.string().optional(),

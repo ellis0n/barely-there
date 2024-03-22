@@ -1,32 +1,35 @@
 ---
+
+export const prerender = true
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { type GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const releases = await getCollection("releases");
 	return releases.map((release) => ({
 		params: {
-			id: release.data.id,
+			id: release.data.id, 
 		},
 		props: {
 			release: release.data,
-			render: release.render(),
+			render: release.render()
 		},
 	}));
 };
 
-const release = Astro.props.release;
-const { Content } = await Astro.props.render;
+const release = Astro.props.release as CollectionEntry<"releases">["data"];
+const {Content} = await Astro.props.render as {Content: any};
+
+
 ---
 
 <Layout
 	title=`${release.albumTitle} by ${release.artist}`
 	layout="content"
-	current="/releases"
 >
-	<!-- <div slot="sidebar">releases</div> -->
 	<div slot="content">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div class="">

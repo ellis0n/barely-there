@@ -3,7 +3,7 @@ import type { GetStaticPaths } from "astro";
 import Layout from "@layouts/Layout.astro";
 
 interface Props {
-	post: any;
+	post: 
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -26,14 +26,10 @@ const frontmatter = Astro.props.post.frontmatter;
 
 <Layout
 	title={frontmatter.title}
-	current="/blogs"
 	layout="content"
 	meta={frontmatter}
 >
-	<div slot="sidebar">
-		<h1>{frontmatter.title}</h1>
-		<p>{frontmatter.date}</p>
-	</div>
+	
 	<div slot="content">
 		<Content />
 	</div>

@@ -5,4 +5,8 @@ interface Props{
 
 const { title } = Astro.props;
 ---
-<h2 class="text-6xl bg-black text-white">{title}</h2>
+<div class="w-full bg-black flex z-[200] sticky justify-center py-20 mb-2 text-white ">
+    <h2 class="text-3xl w-content scroll:hidden">
+        {title}
+    </h2>
+</div>

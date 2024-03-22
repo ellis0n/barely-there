@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import Heading from "@components/Heading.astro"
+
 
 // Get all shows, sort by date and remove drafts
 const shows = await getCollection("shows").then((shows) =>
@@ -23,22 +25,10 @@ function formatDate(date: string | number | Date) {
 	});
 }
 
-//TODO:
-//
-// - add dynamic bg image to upcoming shows (or just create astro component for bg bar)
-//
-// - on hover of upcoming show, show poster in view
-//
-// - toggle past shows list on click for mobile view
-//
-// - view transition: use background image and header as the primary element for // [show] page, not the current poster
-//
-// - paginate past shows list once some content is added
 ---
 
 <Layout title="shows" layout="content">
 	<div slot="content">
-		<h2 class="text-6xl bg-black text-white">shows</h2>
 		<div class="w-full flex justify-center">
 			<div class="w-content py-12 grid grid-cols-1 items-center sm:grid-cols-2 sm:gap-12">
 				<div class="text-2xl">

@@ -6,15 +6,12 @@ const posts = await getCollection("posts");
 
 const authorsGlob = await Astro.glob("../content/authors/*.json");
 const authors = authorsGlob.map((author) => ({
-	author: author.default,
+	author: author,
 }));
 ---
 
-<Layout title="blogs" current="/blogs" layout="content">
-	<!-- <h1 slot="sidebar"></h1> -->
-
+<Layout title="blogs" layout="content">
 	<div class="mb-4" slot="content">
-		<h2 class="text-6xl bg-black text-white">blogs</h2>
 		<h2>by author:</h2>
 		{
 			authors.map((author) => (
@@ -28,7 +25,6 @@ const authors = authorsGlob.map((author) => ({
 			))
 		}
 
-		<!-- TODO: Temporary UI to access all posts -->
 		<div class="border-black border-2">
 			<h2>All Posts:</h2>
 

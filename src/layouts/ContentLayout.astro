@@ -1,9 +1,17 @@
 ---
 import Header from "@components/Header.astro";
+import Heading from "@components/Heading.astro";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
 
 ---
 <Header />
-<main class="pt-44 w-full">
+<main class="pt-36 w-full">
+	<Heading title={title}/>
 		<slot />
 </main>
 

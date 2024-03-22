@@ -1,12 +1,18 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
-const typography = require('@tailwindcss/typography');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		extend: {
+			colors: {
+				'100': '#CB3E1E',
+				'200': '#FEFEFE',
+			},
+			gradientColorStopPositions: {
+				33: '33%',
+			},
 			fontFamily: {
 				sans: ["Geist Sans", ...defaultTheme.fontFamily.sans],
 				mono: ["Geist Mono", ...defaultTheme.fontFamily.serif],
@@ -14,7 +20,7 @@ module.exports = {
 			gridTemplateColumns: {
 				0: 'repeat(1,minmax(0, 0fr))',
 				'5e-5e-1f': 'minmax(0, 5em) minmax(0, 5em) minmax(0, 1fr)',
-				'header': '6vw 1fr 1fr 6vw',
+				'header': 'minmax(0, 100dvw) 1fr 2fr',
 			},
 			gridTemplateRows: {
 				0: 'repeat(1,minmax(0, 0fr))',
