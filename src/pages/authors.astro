@@ -1,17 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
-
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
-import { type CollectionEntry, getCollection } from "astro:content";
-
-const authors: CollectionEntry<"authors">[] = await getCollection("authors");
+const authors = await getCollection("authors");
 ---
 
 <Layout title="authors" layout="content">
 	<ContentLayout>
 		<h2 slot="sidebar">authors</h2>
+		<h3>hi</h3>
 
 		<div slot="content">
 			{

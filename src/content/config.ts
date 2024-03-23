@@ -1,18 +1,17 @@
-import type { ZodString } from "astro/zod";
 import { defineCollection, reference, z } from "astro:content";
 
 const posts = defineCollection({
 	type: "content",
 	schema: z.object({
 		title: z.string(),
-		username: reference("authors"),
+		username: reference('authors'),
 		relatedPosts: z.array(reference("posts")),
 		draft: z.boolean().optional(),
 	}),
 });
 
 const authors = defineCollection({
-	type: "data",
+	type: "content",
 	schema: z.object({
 		username: z.string(),
 		firstname: z.string(),
@@ -21,7 +20,7 @@ const authors = defineCollection({
 		twitter: z.string().url(),
 		instagram: z.string().url(),
 		avatar: z.string(),
-		github: z.string().url().optional(),
+		authoredPosts: z.array(reference("posts")),
 	}),
 });
 

@@ -33,7 +33,7 @@ const authors = authorsGlob.map((author) => ({
 					posts.map((post) => (
 						<li>
 							<a href={`/blogs/${post.slug}`}>
-								{post.data.username.id} - {post.data.title}
+								{post.data.username} - {post.data.title}
 							</a>
 						</li>
 					))

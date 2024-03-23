@@ -1,38 +1,32 @@
 ---
-import type { GetStaticPaths } from "astro";
 import Layout from "@layouts/Layout.astro";
 
 interface Props {
 	post: 
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const posts = await Astro.glob("../../content/posts/**/*.md");
+export const getStaticPaths = async () => {
+	const posts = await getCollection("posts");
+	return posts.map((post) => ({ 
+			params: {
+				slug: post.slug
+			},
+			props: {post},
+		}))
+}
 
-	return (
-		posts
-			// .filter((post) => post.frontmatter.data.draft === false)
-			.map((post) => ({
-				params: { slug: post.frontmatter.slug },
-				props: { post },
-			}))
-	);
-};
-
-const { Content } = Astro.props.post;
-
-const frontmatter = Astro.props.post.frontmatter;
+const post = Astro.props.post.data;
+const { Content } = await Astro.props.post.render()
 ---
 
 <Layout
-	title={frontmatter.title}
+	title={post.title}
 	layout="content"
-	meta={frontmatter}
 >
-	
+	<div slot="sidebar">
+		<h1>{post.title}</h1>
+	</div>
 	<div slot="content">
 		<Content />
 	</div>
 </Layout>
-
- ```

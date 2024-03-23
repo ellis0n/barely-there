@@ -1,58 +1,29 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { getEntries } from "astro:content";
 
-
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    const authorsGlob = await Astro.glob("../../content/authors/*.json");
-
-    const postsGlob = await Astro.glob("../../content/posts/**/*.md");
-
-    const posts = postsGlob.map((post) => post.frontmatter)
-
-    const authors = authorsGlob.map((author) => ({
-        author: author.default,
-        posts:[],
-    }))
-
-    const getPostsByAuthor = (author: { author: any; posts?: never[]; }, posts: any[]) => {
-        const authorPosts: any[] = []
-        posts.forEach((post: { username: any; }) => {
-            if (post.username === author.author.username) {
-                authorPosts.push(post)
-            }
-        })
-        return authorPosts;
-    }    
-
-    authors.forEach((author) => {
-        author.posts = getPostsByAuthor(author, posts)
-    })
+export const getStaticPaths = async () => {
+    const authors = await getCollection("authors");     
 
     return authors.
     map((author) => ({
-        params: {username: author.author.username},
-        props: {author: author.author, posts: author.posts}
+        params: {
+            slug: author.data.username,
+        },
+        props: {
+            author: author
+        },
     }))
 }
 
-
-const author = Astro.props.author;
-const posts = Astro.props.posts;
-
-interface Post {
-    title: string;
-    description: string;
-    date: string;
-    slug: string;
-    username: string;
-}
+const author = Astro.props.author.data;
+// const posts = Astro.props.author.data.authoredPosts;
+const posts = await getEntries(author.authoredPosts)
 
 ---
 <Layout
-    title=`${author.default.username}`
-    current="/blogs" 
+    title=`${author.username}`
     layout="content"
 >
 
@@ -64,22 +35,18 @@ interface Post {
     
     <div class="mt-5">
         <ul>
-            {posts.map((post: Post) => 
+            {posts.map((post) => 
                 (
                     <div class="w-full">
                         <div class=" justify-between sm:flex bg-black text-white mb-2 w-100">
                             <a href={`/blogs/${post.slug}`}>
                                 <li>
-                                    {post.title}
+                                    {post.data.title}
                                 </li>
                             </a>
                             <button
                             class="bg-black text-white hover:bg-white hover:text-black border border-white hover:border-black"
                             >✓</button>
-                        </div>
-                        <div class="hidden">
-                            {post.description}
-                            {post.date}
                         </div>
                     </div>
                 )

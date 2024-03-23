@@ -1,5 +1,4 @@
 ---
-
 const links = [
 	{
 		text: "RELEASES",
@@ -23,24 +22,20 @@ const links = [
 	// },
 ];
 
-
-
 const setActive = (href: string) => {
-    if (Astro.url.pathname.startsWith(href)) {
-        return "active";
-    }
+	if (Astro.url.pathname.startsWith(href)) {
+		return "active";
+	}
 };
-
-
 ---
-<nav class=" flex flex-col justify-center  ">
+
+<nav class="flex flex-col justify-center">
 	<ul class="scroll:hidden">
 		{
-			links.map((link, index) => (
-				<a href={link.href} >
+			links.map((link) => (
+				<a href={link.href}>
 					<li
-						class={
-								`nav-item text-300 font-black pr-6 sm:pr-12 pl-1 
+						class={`nav-item text-300 font-black pr-6 sm:pr-12 pl-1 
 								${setActive(link.href)}
 							`}
 					>
@@ -51,7 +46,11 @@ const setActive = (href: string) => {
 		}
 	</ul>
 
-	<a class="hidden scroll:block text-100 flex justify-end " href="#" id="scrollbutton">
+	<a
+		class="hidden scroll:block text-100 flex justify-end"
+		href="#"
+		id="scrollbutton"
+	>
 		<svg
 			class="w-6 h-6"
 			fill="none"
@@ -63,8 +62,7 @@ const setActive = (href: string) => {
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				stroke-width="2"
-				d="M5 10l7-7m0 0l7 7m-7-7v18"
-			></path>
+				d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
 		</svg>
 	</a>
 </nav>
@@ -75,17 +73,15 @@ const setActive = (href: string) => {
 		background: black;
 		color: #fff;
 	}
-
 </style>
 
 <script>
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+	function scrollToTop() {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}
 
-const scrollButton = document.getElementById('scrollbutton');
-if (scrollButton) {
-	scrollButton.addEventListener('click', scrollToTop);
-}
-
+	const scrollButton = document.getElementById("scrollbutton");
+	if (scrollButton) {
+		scrollButton.addEventListener("click", scrollToTop);
+	}
 </script>

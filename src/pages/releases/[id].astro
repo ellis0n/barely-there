@@ -1,35 +1,24 @@
 ---
-
-export const prerender = true
+export const prerender = true;
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { type GetStaticPaths } from "astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
 	const releases = await getCollection("releases");
 	return releases.map((release) => ({
 		params: {
-			id: release.data.id, 
+			id: release.data.id,
 		},
-		props: {
-			release: release.data,
-			render: release.render()
-		},
+		props: release,
 	}));
 };
 
-const release = Astro.props.release as CollectionEntry<"releases">["data"];
-const {Content} = await Astro.props.render as {Content: any};
-
-
+const release = Astro.props.data;
+const { Content } = await Astro.props.render();
 ---
 
-<Layout
-	title=`${release.albumTitle} by ${release.artist}`
-	layout="content"
->
+<Layout title=`${release.albumTitle} by ${release.artist}` layout="content">
 	<div slot="content">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 			<div class="">
@@ -44,8 +33,8 @@ const {Content} = await Astro.props.render as {Content: any};
 					src={release.bandcampEmbed}
 					seamless
 				>
-					<a href={release.bandcamp}> {release.albumTitle} by {release.artist}
-					</a>
+					<a href={release.bandcamp}> {release.albumTitle} by
+					{release.artist} </a>
 				</iframe>
 			</div>
 			<div class="prose">
