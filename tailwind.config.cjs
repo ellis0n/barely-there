@@ -47,6 +47,5 @@ module.exports = {
 				addVariant('scroll', ':merge(.scroll) &');
 				addVariant('is-checked', ':merge(:checked +) &');
 			}), 
-			require("@tailwindcss/typography")
 		]
 };

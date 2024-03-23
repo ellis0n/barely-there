@@ -6,6 +6,6 @@
 			"@components/*": ["src/components/*"],
 			"@content/*": ["src/content/*"],
 			"@layouts/*": ["src/layouts/*"]
-		}
+		},
 	}
 }

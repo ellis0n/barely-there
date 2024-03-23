@@ -37,19 +37,25 @@ function formatDate(date: string | number | Date) {
 ---
 
 <Layout title="shows" layout="content">
-	<div slot="content">
+	<div>
 		<h2 class="text-6xl bg-black text-white">shows</h2>
 		<div class="w-full flex justify-center">
-			<div class="w-content py-12 grid grid-cols-1 items-center sm:grid-cols-2 sm:gap-12">
+			<div
+				class="w-content py-12 grid grid-cols-1 items-center sm:grid-cols-2 sm:gap-12"
+			>
 				<div class="text-2xl">
 					{
 						upcomingShows.length === 0 && (
-							<h2 class="text-black mt-2 px-pb underline">upcoming tba</h2>
+							<h2 class="text-black mt-2 px-pb underline">
+								upcoming tba
+							</h2>
 						)
 					}
 					{
 						upcomingShows.length > 0 && (
-							<h2 class="text-4xl text-black mt-2 px-pb underline">upcoming:</h2>
+							<h2 class="text-4xl text-black mt-2 px-pb underline">
+								upcoming:
+							</h2>
 						)
 					}
 					<div class="ml-2">
@@ -58,7 +64,9 @@ function formatDate(date: string | number | Date) {
 								return (
 									<div class="bg-black mt-4 shadow-sm">
 										<div
-											style={{ "--image-url": `url(${show.poster.src})` }}
+											style={{
+												"--image-url": `url(${show.poster.src})`,
+											}}
 											class="bg-[image:var(--image-url)] bg-center bg-cover bg-blend-screen bg-clip-border text-2xl sm:text-6xl"
 										>
 											<a href={``}>
@@ -99,7 +107,9 @@ function formatDate(date: string | number | Date) {
 									return (
 										<>
 											<div class=" text-white flex justify-between">
-												<h3 class="bg-black text-white">{show.title}</h3>
+												<h3 class="bg-black text-white">
+													{show.title}
+												</h3>
 												<h4>{formatDate(show.date)}</h4>
 											</div>
 											<Image
@@ -141,4 +151,3 @@ function formatDate(date: string | number | Date) {
 		</div>
 	</div>
 </Layout>
-

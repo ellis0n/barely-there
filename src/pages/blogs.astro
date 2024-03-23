@@ -4,23 +4,19 @@ import Layout from "../layouts/Layout.astro";
 
 const posts = await getCollection("posts");
 
-const authorsGlob = await Astro.glob("../content/authors/*.json");
-const authors = authorsGlob.map((author) => ({
-	author: author.default,
-}));
+const authors = await getCollection("authors");
 ---
 
 <Layout title="blogs" layout="content">
-
-	<div class="mb-4" slot="content">
+	<div class="mb-4">
 		<h2 class="text-6xl bg-black text-white">blogs</h2>
 		<h2>by author:</h2>
 		{
 			authors.map((author) => (
 				<div class="mt-2 ml-6">
 					<h2>
-						<a href={`/authors/${author.author.username}`}>
-							{author.author.username}
+						<a href={`/authors/${author.data.username}`}>
+							{author.data.username}
 						</a>
 					</h2>
 				</div>
