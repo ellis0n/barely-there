@@ -1,7 +1,7 @@
 ---
 // Fonts
 import "@fontsource/geist-sans";
-// import "@fontsource/geist-mono";
+import "@fontsource/geist-mono";
 
 import ContentLayout from "./ContentLayout.astro";
 
@@ -15,61 +15,58 @@ interface Props {
 	layout: string;
 }
 
-const { 
-  title,
-  // layout
-   } = Astro.props;
-// const layoutName =
-	// layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
+const { title, layout, meta } = Astro.props;
 
-// const Wrapper = await import(`../layouts/${layoutName}Layout.astro`); TODO: Dynamic import example if required
+const layoutName =
+	layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
+
+const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
 ---
 
 <!doctype html>
 <html lang="en">
 	<Head title={title} />
-	<body class="bg-gray-200 font-sans w-full">
-		<ContentLayout>
+	<body class="bg-100 font-sans w-full">
+		<Wrapper.default meta={meta} title={title}>
 			<slot name="content" />
-		</ContentLayout>
-		<Footer/>
+		</Wrapper.default>
+		<Footer />
+		<script>
+			// Function to initialize Intersection Observer
+			const initIntersectionObserver = () => {
+				const body = document.querySelector("body");
+				const observeHeader = document.querySelector(
+					'[data-scroll-watcher="header"]'
+				);
+				let scrollObserver;
+
+				scrollObserver = new IntersectionObserver(
+					(positions) => {
+						positions.forEach((position) => {
+							if (position.target instanceof HTMLElement) {
+								switch (position.target.dataset.scrollWatcher) {
+									case "header":
+										body?.classList.toggle(
+											"scroll",
+											!position.isIntersecting
+										);
+										break;
+								}
+							}
+						});
+					},
+					{ rootMargin: "120px 0px -45px 0px" }
+				);
+
+				if (observeHeader) {
+					scrollObserver.observe(observeHeader);
+				}
+			};
+
+			// Run Intersection Observer setup after page load
+			document.addEventListener("astro:page-load", () => {
+				initIntersectionObserver();
+			});
+		</script>
 	</body>
 </html>
-
-<script>
-  // Function to initialize Intersection Observer
-  const initIntersectionObserver = () => {
-	const body = document.querySelector('body');
-	const observeHeader = document.querySelector('[data-scroll-watcher="header"]');
-	let scrollObserver;
-
-    scrollObserver = new IntersectionObserver(
-      (positions) => {
-        positions.forEach((position) => {
-          if (position.target instanceof HTMLElement) {
-            switch (position.target.dataset.scrollWatcher) {
-              case 'header':
-                body?.classList.toggle('scroll', !position.isIntersecting);
-                break;
-            }
-          }
-        });
-      },
-      { rootMargin: '150px 0px -45px 0px' },
-    );
-
-    if (observeHeader) {
-      scrollObserver.observe(observeHeader);
-    }
-  };
-
-
-  // Run Intersection Observer setup after page load
-  document.addEventListener('astro:page-load', () => {
-    initIntersectionObserver();
-  });
-</script>
-
-
-
-

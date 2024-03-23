@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
@@ -9,19 +11,15 @@ export const getStaticPaths = async () => {
 		params: {
 			id: release.data.id,
 		},
-		props: release
+		props: release,
 	}));
 };
 
-
-const release =  Astro.props.data;
+const release = Astro.props.data;
 const { Content } = await Astro.props.render();
 ---
 
-<Layout
-	title=`${release.albumTitle} by ${release.artist}`
-	layout="content"
->
+<Layout title=`${release.albumTitle} by ${release.artist}` layout="content">
 	<!-- <div slot="sidebar">releases</div> -->
 	<div slot="content">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -37,8 +35,8 @@ const { Content } = await Astro.props.render();
 					src={release.bandcampEmbed}
 					seamless
 				>
-					<a href={release.bandcamp}> {release.albumTitle} by {release.artist}
-					</a>
+					<a href={release.bandcamp}> {release.albumTitle} by
+					{release.artist} </a>
 				</iframe>
 			</div>
 			<div class="prose">
