@@ -10,6 +10,7 @@ export const getStaticPaths = async () => {
 			id: release.data.id,
 		},
 		props: release,
+		render: release.render,
 	}));
 };
 

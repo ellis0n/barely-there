@@ -69,5 +69,30 @@ const {
 				initIntersectionObserver();
 			});
 		</script>
+
+		<style is:global>
+			.grid-layout {
+				--full: 0.15fr;
+				--wide: 0;
+				--col: 2.5fr;
+				--gap: 0;
+
+				display: grid;
+				grid-auto-rows: auto;
+				grid-template-columns:
+					[full-start] minmax(0, var(--full))
+					[wide-start] minmax(0, var(--wide))
+					[content-start left-col-start] minmax(0, var(--col))
+					[left-col-end left-gap-start] minmax(0, var(--gap))
+					[left-gap-end right-gap-start] minmax(0, var(--gap))
+					[right-gap-end right-col-start] minmax(0, var(--col))
+					[right-col-end content-end] minmax(0, var(--wide))
+					[wide-end] minmax(0, var(--full))
+					[full-end];
+			}
+			.grid-layout > :where(:not([class*="col-"])) {
+				grid-column: content;
+			}
+		</style>
 	</body>
 </html>

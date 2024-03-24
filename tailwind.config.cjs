@@ -10,6 +10,33 @@ module.exports = {
 				sans: ["Geist Sans", ...defaultTheme.fontFamily.sans],
 				mono: ["Geist Mono", ...defaultTheme.fontFamily.serif],
 			},
+			gridColumn: {
+				full: 'full',
+				wide: 'wide',
+				content: 'content',
+				'left-col': 'left-col',
+				'left-gap': 'left-gap',
+				'right-gap': 'right-gap',
+				'right-col': 'right-col',
+			},
+			gridColumnEnd: {
+				full: 'full',
+				wide: 'wide',
+				content: 'content',
+				'left-col': 'left-col',
+				'left-gap': 'left-gap',
+				'right-gap': 'right-gap',
+				'right-col': 'right-col',
+			},
+			gridColumnStart: {
+				full: 'full',
+				wide: 'wide',
+				content: 'content',
+				'left-col': 'left-col',
+				'left-gap': 'left-gap',
+				'right-gap': 'right-gap',
+				'right-col': 'right-col',
+			},
 			gridTemplateColumns: {
 				0: 'repeat(1,minmax(0, 0fr))',
 				'5e-5e-1f': 'minmax(0, 5em) minmax(0, 5em) minmax(0, 1fr)',
@@ -18,6 +45,9 @@ module.exports = {
 			gridTemplateRows: {
 				0: 'repeat(1,minmax(0, 0fr))',
 				footer: '3vw 1fr 1fr 3vw',
+			},
+			transitionProperty: {
+				grid: 'grid-template-rows, grid-template-columns',
 			},
 			width: {
 				content: 'min(100vw - 1.5rem, 72rem)',
