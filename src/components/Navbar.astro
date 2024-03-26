@@ -29,13 +29,15 @@ const setActive = (href: string) => {
 };
 ---
 
-<nav class="col-start-right-col flex items-center transition-all scroll:hidden">
+<nav
+	class="col-start-right-col flex items-end text-300 sm:text-500 transition-all scroll:hidden"
+>
 	<ul class="space-y-1">
 		{
 			links.map((link) => (
 				<a href={link.href}>
 					<li
-						class={`nav-item text-300 font-black
+						class={`nav-item font-black hover:bg-black hover:text-white
 								${setActive(link.href)}
 							`}
 					>

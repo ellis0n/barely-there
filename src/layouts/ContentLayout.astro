@@ -1,9 +1,16 @@
 ---
 import Header from "@components/Header.astro";
+import Heading from "@components/Heading.astro";
 
+const { innerPage, title } = Astro.props;
 ---
-<Header />
-<main class="pt-44 w-full">
-		<slot />
-</main>
 
+<Header />
+<Heading title={title} innerPage={innerPage} />
+<div class="min-h-dvh relative">
+	<div
+		class="pt-[6rem] min-h-dvh min-w-content scroll:pt-[19rem] transition-all"
+	>
+		<slot />
+	</div>
+</div>

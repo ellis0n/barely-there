@@ -18,18 +18,22 @@ const release = Astro.props.data;
 const { Content } = await Astro.props.render();
 ---
 
-<Layout title=`${release.albumTitle} by ${release.artist}` layout="content">
-	<div>
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div class="">
-				<Image
-					transition:name=`${release.id}`
-					src={release.artwork}
-					alt={release.albumTitle}
-					class="shadow-md mb-4"
-				/>
+<Layout
+	title=`${release.albumTitle} by ${release.artist}`
+	layout="content"
+	innerPage={true}
+>
+	<div class="grid grid-layout">
+		<div class="col-start-left-col">
+			<Image
+				transition:name=`${release.id}`
+				src={release.artwork}
+				alt={release.albumTitle}
+				class="shadow-md mb-4"
+			/>
+			<div class="col-end-right-col">
 				<iframe
-					style="border: 0; width: 100%; height: 100px;"
+					style="border: 0; width: 100%; height: 100px; "
 					src={release.bandcampEmbed}
 					seamless
 				>
@@ -37,9 +41,9 @@ const { Content } = await Astro.props.render();
 					{release.artist} </a>
 				</iframe>
 			</div>
-			<div class="prose">
-				<Content />
-			</div>
+		</div>
+		<div class="prose col-start-right-col">
+			<Content />
 		</div>
 	</div>
 </Layout>

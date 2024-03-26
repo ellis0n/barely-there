@@ -7,11 +7,11 @@ const releases = await getCollection("releases");
 
 <div class="w-full flex justify-center">
 	<div
-		class="w-content items-center py-12 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8 lg:grid-cols-4"
+		class="w-content items-center grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-8 lg:grid-cols-4"
 	>
 		{
 			releases.reverse().map((album, index) => (
-				<div class="flex items-end justify-center">
+				<div class="flex items-end justify-center ">
 					<a href={`/releases/${album.data.id}`}>
 						<div class="h-fit">
 							<Image

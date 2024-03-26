@@ -5,21 +5,18 @@ import Navbar from "./Navbar.astro";
 ---
 
 <div data-scroll-watcher="header"></div>
-<header
-	class=`fixed w-full z-20 bg-white backdrop-blur-[1px]  py-4 scroll:py-2
-	`
-	transition:animate="none"
->
-	<div
-		class="grid grid-layout gap-2 justify-center align-center transition-all text-1200 scroll:text-100 transition-all"
-	>
+<header class="fixed w-full z-30 transition-all" transition:animate="none">
+	<div class="bg-white backdrop-blur-[1px] py-8 scroll:py-2">
 		<div
-			class="col-start-wide col-end-left-gap transition-grid scroll:col-end-right-col flex justify-end"
+			class="grid grid-layout gap-2 justify-center align-center text-1200 scroll:text-600 sm:text-1400 scroll:sm:text-800 transition-all"
 		>
-			<a href="/" class="max-w-[16em]">
-				<Logo fill=" #000" />
-			</a>
+			<div class="flex justify-center gap-2">
+				<div class="self-center">
+					<a href="/" class="w-full h-full"> </a>
+					<Logo fill=" #000" />
+				</div>
+				<Navbar />
+			</div>
 		</div>
-		<Navbar />
 	</div>
 </header>
