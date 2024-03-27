@@ -11,7 +11,6 @@ import ContentLayout from "@layouts/ContentLayout.astro";
 interface Props {
 	title: string;
 	innerPage?: boolean;
-	// layout: string;
 }
 // const layoutName =
 // layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
@@ -32,7 +31,6 @@ const { title, innerPage } = Astro.props;
 		</ContentLayout>
 		<Footer />
 		<script>
-			// Function to initialize Intersection Observer
 			const initIntersectionObserver = () => {
 				const body = document.querySelector("body");
 				const observeHeader = document.querySelector(
@@ -50,6 +48,7 @@ const { title, innerPage } = Astro.props;
 											"scroll",
 											!position.isIntersecting
 										);
+
 										break;
 								}
 							}

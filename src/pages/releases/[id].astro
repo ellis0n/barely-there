@@ -18,12 +18,8 @@ const release = Astro.props.data;
 const { Content } = await Astro.props.render();
 ---
 
-<Layout
-	title=`${release.albumTitle} by ${release.artist}`
-	layout="content"
-	innerPage={true}
->
-	<div class="grid grid-layout">
+<Layout title=`${release.albumTitle} by ${release.artist}` innerPage={true}>
+	<div class="grid grid-layout" id="content">
 		<div class="col-start-left-col">
 			<Image
 				transition:name=`${release.id}`

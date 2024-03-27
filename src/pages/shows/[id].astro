@@ -22,7 +22,7 @@ const show = Astro.props.show;
 const { Content } = await Astro.props.render;
 ---
 
-<Layout title=`${show.title} - ${show.date}` layout="content">
+<Layout title=`${show.title} - ${show.date}`>
 	<div>
 		<h1>{show.title}</h1>
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
