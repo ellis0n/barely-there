@@ -10,30 +10,23 @@ import ContentLayout from "@layouts/ContentLayout.astro";
 // Types
 interface Props {
 	title: string;
-	layout: string;
 	innerPage?: boolean;
+	// layout: string;
 }
-
-const {
-	title,
-	innerPage,
-	// layout
-} = Astro.props;
-
 // const layoutName =
 // layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
+// const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
+// call Wrapper.default() to render the layout
 
-// const Wrapper = await import(`../layouts/${layoutName}Layout.astro`); TODO: Dynamic import example if required
+const { title, innerPage } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<Head title={title} />
-	<body
-		class=`bg-gray-200 font-sans w-full overflow-x-hidden
+	<body class=`bg-gray-200 grid grid-layout
 		${innerPage ? "scroll" : ""}
-	 `
-	>
+	 `>
 		<ContentLayout title={title} innerPage={innerPage}>
 			<slot />
 		</ContentLayout>
@@ -98,6 +91,9 @@ const {
 			}
 			.grid-layout > :where(:not([class*="col-"])) {
 				grid-column: content;
+			}
+
+			body {
 			}
 		</style>
 	</body>

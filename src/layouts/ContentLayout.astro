@@ -1,16 +1,24 @@
 ---
 import Header from "@components/Header.astro";
-import Heading from "@components/Heading.astro";
+import Logo from "@components/Logo.astro";
 
 const { innerPage, title } = Astro.props;
 ---
 
-<Header />
-<Heading title={title} innerPage={innerPage} />
-<div class="min-h-dvh relative">
-	<div
-		class="pt-[6rem] min-h-dvh min-w-content scroll:pt-[19rem] transition-all"
-	>
+<Header innerPage={innerPage} title={title} />
+{
+	!innerPage ? (
+		<>
+			<div class="min-h-dvh max-h-dvh w-full fixed scroll:absolute scroll:-top-full scroll:min-h-0 transition-all pt-[17.077em] outline col-full bg-black grid grid-layout">
+				<div class="flex flex-col items-center justify-center h-full bg-white bg-opacity-55 pt-2 sticky px-20">
+					<h1 class="text-1300">{title}</h1>
+				</div>
+			</div>
+			<div class="invisible scroll:visible transition:all pt-[17.077em]">
+				<slot />
+			</div>
+		</>
+	) : (
 		<slot />
-	</div>
-</div>
+	)
+}
