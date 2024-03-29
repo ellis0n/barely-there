@@ -24,7 +24,6 @@ const { title, innerPage } = Astro.props;
 <html lang="en">
 	<Head title={title} />
 	<body class=`bg-gray-200 grid grid-layout
-		${innerPage ? "scroll" : ""}
 	 `>
 		<ContentLayout title={title} innerPage={innerPage}>
 			<slot />

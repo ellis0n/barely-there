@@ -1,26 +1,30 @@
 ---
 import Logo from "./Logo.astro";
-import Heading from "./Heading.astro";
+import Subheading from "./Subheading.astro";
 import Navbar from "./Navbar.astro";
+import Hero from "./Hero.astro";
 
 const { title, innerPage } = Astro.props;
 ---
 
 <div data-scroll-watcher="header"></div>
-<header class="fixed w-full z-30 transition-all" transition:animate="none">
-	<div class="bg-white backdrop-blur-[1px] py-4 scroll:py-2">
-		<div
-			class="grid grid-layout gap-2 justify-center align-center text-1200 scroll:text-600 sm:text-1400 scroll:sm:text-800 transition-all"
-		>
-			<div class="flex justify-center gap-2">
-				<div class="self-center">
-					<a href="/" class="w-full h-full">
-						<Logo fill=" #000" />
-					</a>
+<header class="absolute scroll:fixed w-full z-30 transition-all">
+	<div class="relative">
+		<div class="bg-white backdrop-blur-[1px]" transition:animate="none">
+			<div
+				class="grid grid-layout gap-2 justify-center align-center text-1200 scroll:text-600 sm:text-1400 scroll:sm:text-800 transition-all"
+			>
+				<div class="flex justify-center gap-2 p-2">
+					<div class="self-center">
+						<a href="/" class="w-full h-full">
+							<Logo fill=" #000" />
+						</a>
+					</div>
+					<Navbar />
 				</div>
-				<Navbar />
 			</div>
 		</div>
+		<Subheading title={title} innerPage={innerPage} />
+		<Hero title={title} innerPage={innerPage} />
 	</div>
-	<Heading title={title} innerPage={innerPage} />
 </header>

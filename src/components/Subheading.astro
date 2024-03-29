@@ -9,9 +9,9 @@ console.log(innerPage);
 ---
 
 <div
-	class=`${innerPage ? 'scroll' : ''} transition-all grid-col-full grid grid-layout scroll:fixed w-full z-20 bg-black scroll:bg-none scroll:bg-opacity-80 backdrop-blur-lg  `
+	class=` col-start-wide transition-all grid-col-full grid grid-layout w-full z-20 bg-black scroll:bg-none scroll:bg-opacity-80 backdrop-blur-lg sticky scroll:top-0 `
 >
-	<h1 class="text-1200 scroll:text-800 text-white
+	<h2 class="text-1200 scroll:text-800 text-white
 		transition-all">
 		<span
 			class="text-400 scroll:text-200 sm:text-800 sm:scroll:text-600 lg:text-1000 lg:scroll:text-800"
@@ -19,5 +19,5 @@ console.log(innerPage);
 			barely there //
 		</span>
 		{title}
-	</h1>
+	</h2>
 </div>
