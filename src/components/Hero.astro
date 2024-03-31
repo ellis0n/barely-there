@@ -1,29 +1,22 @@
 ---
-const title = Astro.props.title;
+import { getCollection } from "astro:content";
+
+const collection = await getCollection("heroes");
+const { title } = Astro.props;
+
+const content = collection.find((hero) => hero.slug === title);
+if (!content) {
+	throw new Error(`No hero found for slug "${title}"`);
+}
+const { Content } = await content.render();
 ---
 
 <div
-	class="min-h-dvh max-h-dvh w-full scroll:min-h-auto transition-all col-full"
+	class="min-h-dvh max-h-dvh bg-opacity-90 bg-black scroll:bg-none w-full transition-all col-full text-white grid grid-layout overflow-scroll scroll:overflow-clip scroll:max-h-0 scroll:min-h-0"
 	id="hero"
 >
-	<div
-		class="flex flex-col items-center justify-center h-full bg-opacity-55 pt-2"
-	>
-		<h1 class="text-1300">{title}</h1>
-		<a href="#content">
-			<svg
-				class="w-8 h-8 mt-4"
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			>
-				<line x1="12" y1="5" x2="12" y2="19"></line>
-				<polyline points="19 12 12 19 5 12"></polyline>
-			</svg>
-		</a>
+	<div class="text-black bg-white">
+		<h1 class="text-1200 font-black">{content.data.title}</h1>
+		<Content />
 	</div>
 </div>

@@ -1,10 +1,10 @@
 ---
 import Header from "@components/Header.astro";
 
-const { innerPage, title } = Astro.props;
+const { hasHero, title } = Astro.props;
 ---
 
-<Header innerPage={innerPage} title={title} />
-<div class="mt-[17em]" id="content">
+<Header hasHero={hasHero} title={title} />
+<div class="mt-[20em]" id="content">
 	<slot />
 </div>

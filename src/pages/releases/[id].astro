@@ -18,7 +18,7 @@ const release = Astro.props.data;
 const { Content } = await Astro.props.render();
 ---
 
-<Layout title=`${release.albumTitle} by ${release.artist}` innerPage={true}>
+<Layout title=`${release.albumTitle} by ${release.artist}` hasHero={false}>
 	<div class="grid grid-layout">
 		<div class="col-start-left-col">
 			<Image

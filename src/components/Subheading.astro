@@ -1,11 +1,11 @@
 ---
 interface Props {
 	title: string;
-	innerPage?: boolean;
+	hasHero?: boolean;
 }
 
-const { title, innerPage } = Astro.props;
-console.log(innerPage);
+const { title, hasHero } = Astro.props;
+console.log(hasHero);
 ---
 
 <div
@@ -18,6 +18,8 @@ console.log(innerPage);
 		>
 			barely there //
 		</span>
-		{title}
+		<span class="invisible scroll:visible">
+			{title}
+		</span>
 	</h2>
 </div>

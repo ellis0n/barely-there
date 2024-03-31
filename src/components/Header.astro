@@ -4,7 +4,7 @@ import Subheading from "./Subheading.astro";
 import Navbar from "./Navbar.astro";
 import Hero from "./Hero.astro";
 
-const { title, innerPage } = Astro.props;
+const { title, hasHero } = Astro.props;
 ---
 
 <div data-scroll-watcher="header"></div>
@@ -12,7 +12,7 @@ const { title, innerPage } = Astro.props;
 	<div class="relative">
 		<div class="bg-white backdrop-blur-[1px]" transition:animate="none">
 			<div
-				class="grid grid-layout gap-2 justify-center align-center text-1200 scroll:text-600 sm:text-1400 scroll:sm:text-800 transition-all"
+				class="grid grid-layout gap-2 justify-center align-center text-900 scroll:text-600 sm:text-1400 scroll:sm:text-800 transition-all"
 			>
 				<div class="flex justify-center gap-2 p-2">
 					<div class="self-center">
@@ -24,7 +24,7 @@ const { title, innerPage } = Astro.props;
 				</div>
 			</div>
 		</div>
-		<Subheading title={title} innerPage={innerPage} />
-		<Hero title={title} innerPage={innerPage} />
+		<Subheading title={title} hasHero={hasHero} />
+		{hasHero ? <Hero title={title} /> : null}
 	</div>
 </header>
