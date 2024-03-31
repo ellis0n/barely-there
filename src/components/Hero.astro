@@ -12,10 +12,10 @@ const { Content } = await content.render();
 ---
 
 <div
-	class="min-h-dvh max-h-dvh bg-opacity-90 bg-black scroll:bg-none w-full transition-all col-full text-white grid grid-layout overflow-scroll scroll:overflow-clip scroll:max-h-0 scroll:min-h-0"
+	class="min-h-dvh max-h-dvh bg-white scroll:bg-none w-full transition-all text-white grid grid-layout overflow-y-auto scroll:overflow-clip scroll:max-h-0 scroll:min-h-0"
 	id="hero"
 >
-	<div class="text-black bg-white">
+	<div class="text-black bg-white mb-[12em]">
 		<h1 class="text-1200 font-black">{content.data.title}</h1>
 		<Content />
 	</div>
