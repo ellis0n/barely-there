@@ -8,6 +8,9 @@ module.exports = {
 		extend: {
 			backgroundImage: {
 				grainy: 'url("/grainy.svg")',
+				clouds: 'url("/src/assets/clouds.jpg")',
+				home: 'url("/src/assets/clouds.jpg")',
+
 			},
 			fontFamily: {
 				sans: ["Geist Sans", ...defaultTheme.fontFamily.sans],

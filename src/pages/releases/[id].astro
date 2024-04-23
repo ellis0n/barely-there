@@ -18,7 +18,7 @@ const release = Astro.props.data;
 const { Content } = await Astro.props.render();
 ---
 
-<Layout title=`${release.albumTitle} by ${release.artist}` hasHero={false}>
+<Layout title=`${release.albumTitle} by ${release.artist}`>
 	<div class="grid grid-layout">
 		<div class="col-start-left-col">
 			<Image
@@ -38,7 +38,7 @@ const { Content } = await Astro.props.render();
 				</iframe>
 			</div>
 		</div>
-		<div class="prose col-start-right-col">
+		<div class="col-start-right-col">
 			<Content />
 		</div>
 	</div>

@@ -4,7 +4,8 @@ import Subheading from "./Subheading.astro";
 import Navbar from "./Navbar.astro";
 import Hero from "./Hero.astro";
 
-const { title, hasHero } = Astro.props;
+const { title, hero } = Astro.props;
+console.log(hero);
 ---
 
 <div data-scroll-watcher="header"></div>
@@ -24,7 +25,7 @@ const { title, hasHero } = Astro.props;
 				</div>
 			</div>
 		</div>
-		<Subheading title={title} hasHero={hasHero} />
-		{hasHero ? <Hero title={title} /> : null}
+		<Subheading title={title} hero={hero} />
+		{hero ? <Hero title={title} hero={hero} /> : console.log("hi")}
 	</div>
 </header>

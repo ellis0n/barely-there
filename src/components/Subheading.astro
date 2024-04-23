@@ -1,24 +1,21 @@
 ---
 interface Props {
 	title: string;
-	hasHero?: boolean;
+	hero?: boolean;
 }
 
-const { title, hasHero } = Astro.props;
-console.log(hasHero);
+const { title, hero } = Astro.props;
 ---
 
 <div
 	class=` col-start-wide transition-all grid-col-full grid grid-layout w-full z-20 bg-black scroll:bg-none scroll:bg-opacity-80 backdrop-blur-lg sticky scroll:top-0 `
 >
-	<h2 class="text-1200 scroll:text-800 text-white
-		transition-all">
-		<span
-			class="text-400 scroll:text-200 sm:text-800 sm:scroll:text-600 lg:text-1000 lg:scroll:text-800"
-		>
-			barely there //
-		</span>
-		<span class="invisible scroll:visible">
+	<h2
+		class="text-600 scroll:text-400 sm:text-800 sm:scroll:text-600 lg:text-1000 lg:scroll:text-800 text-white
+		transition-all"
+	>
+		barely there //
+		<span class=`${!hero ? 'visible' : 'invisible'} scroll:visible`>
 			{title}
 		</span>
 	</h2>

@@ -10,16 +10,14 @@ import ContentLayout from "@layouts/ContentLayout.astro";
 // Types
 interface Props {
 	title: string;
-	hasHero?: boolean;
+	hero?: string;
 }
 // const layoutName =
 // layout.charAt(0).toUpperCase() + layout.slice(1).toLowerCase();
 // const Wrapper = await import(`../layouts/${layoutName}Layout.astro`);
 // call Wrapper.default() to render the layout
 
-// default innerPge to false unless explicitly set
-
-const { title, hasHero = false } = Astro.props;
+const { title, hero = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,7 +25,7 @@ const { title, hasHero = false } = Astro.props;
 	<Head title={title} />
 	<body class=`bg-gray-200 grid grid-layout
 	 `>
-		<ContentLayout title={title} hasHero={hasHero}>
+		<ContentLayout title={title} hero={hero}>
 			<slot />
 		</ContentLayout>
 		<Footer />

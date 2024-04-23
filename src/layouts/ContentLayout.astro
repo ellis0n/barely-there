@@ -1,10 +1,13 @@
 ---
 import Header from "@components/Header.astro";
 
-const { hasHero, title } = Astro.props;
+const { hero, title } = Astro.props;
 ---
 
-<Header hasHero={hasHero} title={title} />
-<div class="mt-[20em]" id="content">
+<Header hero={hero} title={title} />
+<div
+	class="top-12 scroll:top-0 mt-[30em] sm:mt-[12em] scroll:mt-[17em] invisible scroll:visible min-h-dvh"
+	id="content"
+>
 	<slot />
 </div>
