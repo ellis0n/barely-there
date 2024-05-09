@@ -1,38 +1,49 @@
 ---
-import { getCollection } from "astro:content";
+// import { getCollection } from "astro:content";
 
-const pages = await getCollection("pages");
+// // const pages = await getCollection("pages");
 
-const { title, hero } = Astro.props;
-const content = pages.find((page) => page.slug === title);
-if (!content) {
-	throw new Error(`No hero found for slug "${title}"`);
-}
+// // const { title, hero } = Astro.props;
+// // const content = pages.find((page) => page.slug === title);
+// // if (!content) {
+// // 	throw new Error(`No hero found for slug "${title}"`);
+// // }
 
-const { Content } = await content.render();
-console.log(hero);
+// // const { Content } = await content.render();
 ---
-
 <div
 	class:list={[
 		"min-h-dvh",
 		"max-h-dvh",
 		"w-full",
-		"text-white",
 		"grid",
 		"grid-layout",
 		"overflow-y-auto",
-		`bg-${hero}`,
-çç		"scroll:max-h-0",
+		`bg-clouds`,
+		'bg-cover',
+		'bg-center',
+		"scroll:max-h-0",
 		"scroll:min-h-0",
+		"scroll:hidden",
 		"scroll:bg-black",
+		"justify-center",
+		"-z-40",
 	]}
 	id="hero"
 >
-	<div class="text-black bg-white bg-opacity-15 shadow p-4 mt-4">
-		<h1 class="text-1200 font-black">
-			{content.data.title}
-		</h1>
-		<Content />
-	</div>
+<div class="justify-center text-center align-center fixed bottom-0 text-lg bg-black text-white p-4 w-full">
+
+		<div>
+			<h1 class="text-5xl font-bold">BARELY THERE <span class="
+			text-5xl font-bold">RECORDS</span></h1>
+		</div>
+		<div>
+			<h2 class="text-3xl font-bold">ST. JOHN'S, NL</h2>
+		</div>
+		<div>
+
+		</div>
+
+</div>
+
 </div>

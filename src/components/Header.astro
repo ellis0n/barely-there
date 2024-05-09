@@ -1,15 +1,15 @@
 ---
 import Logo from "./Logo.astro";
 import Subheading from "./Subheading.astro";
-import Navbar from "./Navbar.astro";
 import Hero from "./Hero.astro";
+import Navbar from "./Navbar.astro";
 
 const { title, hero } = Astro.props;
 console.log(hero);
 ---
 
 <div data-scroll-watcher="header"></div>
-<header class="absolute scroll:fixed w-full z-30 transition-all">
+<header class="fixed w-full z-30 transition-all">
 	<div class="relative">
 		<div class="bg-white backdrop-blur-[1px]" transition:animate="none">
 			<div
@@ -21,11 +21,11 @@ console.log(hero);
 							<Logo fill=" #000" />
 						</a>
 					</div>
-					<Navbar />
+					<Navbar/>
 				</div>
 			</div>
 		</div>
 		<Subheading title={title} hero={hero} />
-		{hero ? <Hero title={title} hero={hero} /> : console.log("hi")}
+		{hero ? <Hero title={title} hero={hero} /> : null}
 	</div>
 </header>

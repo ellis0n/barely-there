@@ -1,132 +1,43 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+const releases = await getCollection("releases");
 ---
 
-<Layout title="home" hero="home">
-	<div class="grid grid-layout">
-		<h1>Lorem Ipsum</h1>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-			ratione eius doloribus facilis. Doloribus odio nostrum quae earum,
-			nihil doloremque impedit commodi totam aspernatur similique quos
-			sint veritatis veniam corporis.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-			ratione eius doloribus facilis. Doloribus odio nostrum quae earum,
-			nihil doloremque impedit commodi totam aspernatur similique quos
-			sint veritatis veniam corporis.
-		</p>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-			ratione eius doloribus facilis. Doloribus odio nostrum quae earum,
-			nihil doloremque impedit commodi totam aspernatur similique quos
-			sint veritatis veniam corporis.
-		</p>
-	</div>
-
-	<div>
-		<h2>Latest Posts</h2>
-		<ul>
-			<li>
-				<a href="/blog/post-1">Post 1</a>
-			</li>
-			<li>
-				<a href="/blog/post-2">Post 2</a>
-			</li>
-			<li>
-				<a href="/blog/post-3">Post 3</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h2>Latest Projects</h2>
-		<ul>
-			<li>
-				<a href="/projects/project-1">Project 1</a>
-			</li>
-			<li>
-				<a href="/projects/project-2">Project 2</a>
-			</li>
-			<li>
-				<a href="/projects/project-3">Project 3</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h2>Latest Videos</h2>
-		<ul>
-			<li>
-				<a href="/videos/video-1">Video 1</a>
-			</li>
-			<li>
-				<a href="/videos/video-2">Video 2</a>
-			</li>
-			<li>
-				<a href="/videos/video-3">Video 3</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h2>Latest Podcasts</h2>
-		<ul>
-			<li>
-				<a href="/podcasts/podcast-1">Podcast 1</a>
-			</li>
-			<li>
-				<a href="/podcasts/podcast-2">Podcast 2</a>
-			</li>
-			<li>
-				<a href="/podcasts/podcast-3">Podcast 3</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h2>Latest Events</h2>
-		<ul>
-			<li>
-				<a href="/events/event-1">Event 1</a>
-			</li>
-			<li>
-				<a href="/events/event-2">Event 2</a>
-			</li>
-			<li>
-				<a href="/events/event-3">Event 3</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h2>Latest Products</h2>
-		<ul>
-			<li>
-				<a href="/products/product-1">Product 1</a>
-			</li>
-			<li>
-				<a href="/products/product-2">Product 2</a>
-			</li>
-			<li>
-				<a href="/products/product-3">Product 3</a>
-			</li>
-		</ul>
-	</div>
-
-	<div>
-		<h2>Latest Services</h2>
-		<ul>
-			<li>
-				<a href="/services/service-1">Service 1</a>
-			</li>
-			<li>
-				<a href="/services/service-2">Service 2</a>
-			</li>
-			<li>
-				<a href="/services/service-3">Service 3</a>
-			</li>
-		</ul>
-	</div>
+<Layout title="barelythererecords" hero="home">
+		<div class="col-start-content invisible scroll:visible">
+			<div class="w-full flex justify-center">
+				<div
+					class="w-content items-center grid grid-cols-1 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3"
+				>
+					{
+						releases.reverse().map((album, index) => (
+							<div class="flex items-end justify-center ">
+								<a href={`/releases/${album.data.id}`}>
+									<div class="h-fit">
+										<Image
+											src={album.data.artwork}
+											alt={album.data.albumTitle}
+											class="object-contain h-95 w-95 rounded-sm"
+											transition:name={`${album.data.id}`}
+											loading={index <= 5 ? "eager" : "lazy"}
+										/>
+									</div>
+									<div class="flex flex-col items-center">
+										<p class="sm:text-2xl sm:hover:text-lg">
+											{album.data.artist}
+										</p>
+										<p class="sm:text-lg">
+											{album.data.albumTitle}
+										</p>
+									</div>
+								</a>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</div>
 </Layout>

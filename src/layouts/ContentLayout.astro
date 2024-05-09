@@ -6,7 +6,7 @@ const { hero, title } = Astro.props;
 
 <Header hero={hero} title={title} />
 <div
-	class="top-12 scroll:top-0 mt-[30em] sm:mt-[12em] scroll:mt-[17em] invisible scroll:visible min-h-dvh"
+	class=`top-12 scroll:top-0 mt-[30em] ${!hero ? 'mt-[17em] min-h-[7em]' :'sm:mt-[12em] scroll:mt-[17em] invisible scroll:visible min-h-dvh'} `
 	id="content"
 >
 	<slot />
